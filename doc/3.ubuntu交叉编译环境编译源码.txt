@@ -20,3 +20,10 @@
         cmake -DBUILD_LUA=OFF -DBUILD_EXAMPLES=OFF -DCMAKE_INSTALL_PREFIX=/mnt/share/build -DCMAKE_TOOLCHAIN_FILE=../toolChain_libubox.cmake .
         make
         make install
+
+3、编译ubus
+    cd ..
+    cd ubus    
+    cmake -DBUILD_LUA=OFF -DCMAKE_INSTALL_PREFIX=/mnt/share/build -DCMAKE_TOOLCHAIN_FILE=../toolChain_ubus.cmake .
+    make
+    make install
