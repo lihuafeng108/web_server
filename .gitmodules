@@ -4,3 +4,6 @@
 [submodule "libubox"]
 	path = libubox
 	url = ../libubox
+[submodule "ubus"]
+	path = ubus
+	url = ../ubus

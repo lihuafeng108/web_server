@@ -3,10 +3,12 @@
     3th_apps
         json-c     //克隆代码：git clone https://github.com/json-c/json-c.git，切换到自建分支test-lihf（方便修改测试记录），并上传到自己的github账户上面
         libubox  //克隆代码：git clone git://git.openwrt.org/project/libubox.git，然后同上操作
+        ubus       //克隆代码：git clone git://git.openwrt.org/project/ubus.git，然后同上操作
         web_server    //项目总目录
             doc            //项目相关文档
             json-c        //子模块，git submodule add ../json-c json-c
             libubox     //同上
+            ubus         //同上
             toolChain_json.cmake
             toolChain_libubox.cmake
 ===============================================            
