@@ -2,7 +2,10 @@
     git clone git@github.com:lihuafeng108/web_server.git
     cd web_server
     git submodule init
-
+    git submodule update （这条命令输入可能要等几分钟才会有反应，类似死机，因为公司的网络慢....下载完成才会有提示）
+        
+    在/etc/profile增加的环境变量：export PATH=$PATH:/opt/gcc-linaro-arm-linux-gnueabihf-4.7-2013.04-20130415_linux/bin
+切换大su之后貌似不生效，因此我在/root/.bashrc文件同样增加这句话。 
 1、交叉编译json-c
         cd json-c
         cmake -DCMAKE_INSTALL_PREFIX=/mnt/share/build -DCMAKE_TOOLCHAIN_FILE=../toolChain_json.cmake .
@@ -10,9 +13,10 @@
         make install
 其中-DCMAKE_INSTALL_PREFIX是用来指定编译后库文件的安装路径。
 
+变态的libubox，引用< json/json.h>头文件，而上面步骤生成的是/mnt/share/build/include/json-c，把json-c文件夹名改成json
 2、编译libubox
         cd ..
         cd libubox        
-        cmake -DBUILD_LUA=OFF -DCMAKE_INSTALL_PREFIX=mnt/share/build -DCMAKE_TOOLCHAIN_FILE=../toolChain_libubox.cmake .
+        cmake -DBUILD_LUA=OFF -DBUILD_EXAMPLES=OFF -DCMAKE_INSTALL_PREFIX=/mnt/share/build -DCMAKE_TOOLCHAIN_FILE=../toolChain_libubox.cmake .
         make
         make install
