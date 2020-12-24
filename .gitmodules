@@ -1,3 +1,6 @@
 [submodule "json-c"]
 	path = json-c
 	url = ../json-c
+[submodule "libubox"]
+	path = libubox
+	url = ../libubox
