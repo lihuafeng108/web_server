@@ -1,0 +1,52 @@
+软件移植：
+在PC端的目录结构：
+    3th_apps
+        json-c     //克隆代码：git clone https://github.com/json-c/json-c.git，切换到自建分支test-lihf（方便修改测试记录），并上传到自己的github账户上面
+        libubox  //克隆代码：git clone git://git.openwrt.org/project/libubox.git，然后同上操作
+        web_server    //项目总目录
+            doc            //项目相关文档
+            json-c        //子模块，git submodule add ../json-c json-c
+            libubox     //同上
+            toolChain_json.cmake
+            toolChain_libubox.cmake
+===============================================            
+toolChain_json.cmake文件：
+set(CMAKE_SYSTEM_NAME Linux)
+ 
+set(CMAKE_C_COMPILER arm-linux-gnueabihf-gcc)
+set(CMAKE_CXX_COMPILER arm-linux-gnueabihf-g++)
+ 
+set(CMAKE_FIND_ROOT_PATH "/mnt/share/src/web_server/json-c")
+set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+
+其中：
+TOOLCHAIN_DIR 为交叉编译工具链所在的目录
+CMAKE_C_COMPILER 是交叉编译器gcc的名称
+CMAKE_CXX_COMPILER 是交叉编译器g++的名称
+CMAKE_FIND_ROOT_PATH 是json-c源码存放的路径
+以上这些需要根据实际情况填写。
+===============================================
++++++++++++++++++++++++++++++++++++++++++++++++
+toolChain_libubox.cmake文件：
+set(CMAKE_SYSTEM_NAME Linux)
+
+set(CMAKE_C_COMPILER arm-linux-gnueabihf-gcc)
+set(CMAKE_CXX_COMPILER arm-linux-gnueabihf-g++)
+ 
+set(INSTALL_PATH "/mnt/share/build")
+include_directories(${INSTALL_PATH}/include)
+include_directories(${INSTALL_PATH}/include/json-c)
+ 
+set(CMAKE_FIND_ROOT_PATH "/mnt/share/src/web_server/libubox")
+set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)
+set(CMAKE_FIND_ROOT_PATH_MODE_INCLUDE ONLY)
+ 
+set(json "/mnt/share/build/lib/libjson-c.so")
+
+其中：
+INSTALL_PATH 是上一步骤中编译产生的库文件的安装路径
+CMAKE_FIND_ROOT_PATH 是libubox源码的存放路径
+json用来指定libjson-c动态库的路径
+以上这些根据实际情况填写。
++++++++++++++++++++++++++++++++++++++++++++++++
