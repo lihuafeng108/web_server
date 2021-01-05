@@ -35,6 +35,10 @@
     make
     make install
 
+    编译前准备：
+    cd /mnt/share/build/include
+    cp -rf json json-c  （因为uhttpd搜索json模块头文件，使用的是json-c文件名，不统一，有点郁闷......）
+    把ustream-ssl.h头文件添加到//mnt/share/build/include/libubox
 4、编译uhttpd
     cd ..
     cd uhttpd
