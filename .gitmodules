@@ -7,3 +7,6 @@
 [submodule "ubus"]
 	path = ubus
 	url = ../ubus
+[submodule "uhttpd"]
+	path = uhttpd
+	url = ../uhttpd

@@ -1,4 +1,5 @@
-    ubuntu 从github上下载源码：
+    ubuntu 从github上下载源码，工程目录建在/mnt/share/src下：
+    cd /mnt/share/src
     git clone git@github.com:lihuafeng108/web_server.git
     cd web_server
     git submodule init
@@ -32,4 +33,13 @@
     cd tmp
     cmake -DBUILD_LUA=OFF -DCMAKE_INSTALL_PREFIX=/mnt/share/build -DCMAKE_TOOLCHAIN_FILE=../../toolChain_ubus.cmake ..
     make
+    make install
+
+4、编译uhttpd
+    cd ..
+    cd uhttpd
+    mkdir tmp
+    cd tmp
+    cmake -DBUILD_LUA=OFF -DCMAKE_INSTALL_PREFIX=/mnt/share/build -DCMAKE_TOOLCHAIN_FILE=../../toolChain_uhttpd.cmake ..
+    make 
     make install
