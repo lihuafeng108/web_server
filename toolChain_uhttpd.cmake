@@ -15,3 +15,5 @@ set(libjson             ${INSTALL_PATH}/lib/libjson-c.so)
 set(ubox_include_dir ${INSTALL_PATH}/include/libubox)
 set(ubox_library     ${INSTALL_PATH}/lib/libubox.so)
 set(ubus             ${INSTALL_PATH}/lib/libubus.so)
+
+add_definitions(-w)
