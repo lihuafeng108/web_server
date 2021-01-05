@@ -111,6 +111,11 @@ ethernets:
         git config --global user.name "371131444"
         git config --global user.email "371131444@qq.com"
 
+        添加切换到root超级用户，git等使用tab按键自动补齐功能：
+        cp /usr/share/bash-completion/bash_completion ~/.bash_completion.bash
+        vi ~/.bashrc  末尾添加：
+        source ~/.bash_completion.bash
+
 16、安装doxygen（可选）
        apt-get install doxygen
 
