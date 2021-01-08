@@ -22,7 +22,7 @@
         cd libubox        
         mkdir tmp
         cd tmp
-        cmake -DBUILD_EXAMPLES=OFF -DCMAKE_INSTALL_PREFIX=/mnt/share/build -DCMAKE_TOOLCHAIN_FILE=../../toolChain_libubox.cmake ..
+        cmake -DBUILD_LUA=OFF -DBUILD_EXAMPLES=OFF -DCMAKE_INSTALL_PREFIX=/mnt/share/build -DCMAKE_TOOLCHAIN_FILE=../../toolChain_libubox.cmake ..
         make
         make install
 
@@ -43,6 +43,6 @@
     cd uhttpd
     mkdir tmp
     cd tmp
-    cmake -DLUA_SUPPORT=OFF -DTLS_SUPPORT=OFF -DCMAKE_INSTALL_PREFIX=/mnt/share/build -DCMAKE_TOOLCHAIN_FILE=../../toolChain_uhttpd.cmake ..
+    cmake -DCMAKE_INSTALL_PREFIX=/mnt/share/build -DCMAKE_TOOLCHAIN_FILE=../../toolChain_uhttpd.cmake ..
     make 
     make install
