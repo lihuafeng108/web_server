@@ -14,20 +14,20 @@
         cmake -DCMAKE_INSTALL_PREFIX=/mnt/share/build -DCMAKE_TOOLCHAIN_FILE=../../toolChain_json.cmake ..
         make
         make install
+        cp -rf /mnt/share/build/include/json-c /mnt/share/build/include/json  ####有些项目会使用不同的目录名
 其中-DCMAKE_INSTALL_PREFIX是用来指定编译后库文件的安装路径。创建临时的tmp文件夹，目的是不要产生cmake污染文件，每次更改toolChain_json.cmake文件都要删掉这个临时文件夹tmp再cmke和编译(貌似不删掉不会重新加载CMAKE_TOOLCHAIN_FILE这个变量)
 
 2、编译libubox
-       （变态的libubox，引用< json/json.h>头文件，而上面步骤生成的是/mnt/share/build/include/json-c，把json-c文件夹名改成json）
-        cd ..
+        cd ../..
         cd libubox        
         mkdir tmp
         cd tmp
-        cmake -DBUILD_LUA=OFF -DBUILD_EXAMPLES=OFF -DCMAKE_INSTALL_PREFIX=/mnt/share/build -DCMAKE_TOOLCHAIN_FILE=../../toolChain_libubox.cmake ..
+        cmake -DBUILD_EXAMPLES=OFF -DCMAKE_INSTALL_PREFIX=/mnt/share/build -DCMAKE_TOOLCHAIN_FILE=../../toolChain_libubox.cmake ..
         make
         make install
 
 3、编译ubus
-    cd ..
+    cd ../..
     cd ubus    
     mkdir tmp
     cd tmp
@@ -37,10 +37,9 @@
 
     编译前准备：
     cd /mnt/share/build/include
-    cp -rf json json-c  （因为uhttpd搜索json模块头文件，使用的是json-c文件名，不统一，有点郁闷......）
     把ustream-ssl.h头文件添加到//mnt/share/build/include/libubox
 4、编译uhttpd
-    cd ..
+    cd ../..
     cd uhttpd
     mkdir tmp
     cd tmp
