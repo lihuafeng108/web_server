@@ -36,8 +36,7 @@
     make install
 
     编译前准备：
-    cd /mnt/share/build/include
-    把ustream-ssl.h头文件添加到//mnt/share/build/include/libubox
+    cp /mnt/share/src/web_server/doc/ustream-ssl.h /mnt/share/build/include/libubox/
 4、编译uhttpd
     cd ../..
     cd uhttpd

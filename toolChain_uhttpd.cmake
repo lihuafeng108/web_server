@@ -9,6 +9,7 @@ link_libraries(crypt)
 set(INSTALL_PATH /mnt/share/build)
 
 include_directories(${INSTALL_PATH}/include) 
+include_directories(${INSTALL_PATH}/include/lua)
 
 set(CMAKE_FIND_ROOT_PATH "/mnt/share/src/web_server/uhttpd" $(INSTALL_PATH))
 set(CMAKE_FIND_ROOT_PATH_MODE_LIBRARY ONLY)

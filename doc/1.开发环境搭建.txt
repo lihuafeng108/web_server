@@ -1,6 +1,6 @@
 1、ubuntu最新LTS镜像下载：
       https://ubuntu.com/download/desktop （官网下载太慢）
-      http://mirrors.aliyun.com/ubuntu-releases/20.10/（阿里云下载更快，我用这个）
+      http://mirrors.aliyun.com/ubuntu-releases/20.10/（阿里云下载更快，我用这个，desktop版本）
 
 2、vmware下载
       https://www.vmware.com/cn.html（官网中国，下载免费试用30天版本） 
