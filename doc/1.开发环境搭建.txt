@@ -13,38 +13,13 @@
      “创建新的虚拟机”->自定义（高级）->下一步->安装程序光盘映像文件(iso)->默认n个下一步->将虚拟磁盘存储为单个文件->然后等待十几分钟下载软件安装成功。
 
 4、设置超级用户root密码
-     sudo passwd root
+     sudo passwd root   ##提示密码不少于8字节
+      添加切换到root超级用户，git等使用tab按键自动补齐功能：
+        cp /usr/share/bash-completion/bash_completion ~/.bash_completion.bash
+        vi ~/.bashrc  末尾添加：
+        source ~/.bash_completion.bash
 
-5、手动更改阿里云的域名
-     /etc/apt/sources.list 文件（用命令行chmod 777 /etc/apt/sources.list改一下文件权限，然后用编辑工具编写方便一点），默认的ubuntu“http://archive.ubuntu.com/”改为“http://mirrors.aliyun.com/”。下载安装软件会更快。
-
-6、vim安装(坑)
-      在插入状态下，按方向键出来的结果竟然是大写的字母ABCD，这是因为在ubuntu中其实没装vi,只装了vim-tiny，在系统上，vi仅仅是vim的一个别名。 这时候需要自己安装完整版的 vim:
-      apt-get install vim
-
-7、安装make，gcc，g++等
-    su root
-    apt-get update
-    apt-get install build-essential  （这个命令默认安装make，gcc和g++等工具）
-    make --version、gcc --version 和 g++ --version可以查看已经安装的版本
-
-8、64位系统安装32位交叉编译工具，需要安装库支持：
-      apt-get install ia32-libs，会提示：
-      However the following packages replace it:
-	lib32z1
-
-      根据提示执行：
-      apt-get install lib32z1
-
-     ubuntu 18.04 以上版本 ia32_libs 被废弃了导致没有32位的lib库。解决方法：
-     apt-get install lib32stdc++6
-
-9、安装RSU5512和RSU4411的交叉编译工具，选择linux版本的压缩包：
-    gcc-linaro-arm-linux-gnueabihf-4.7-2013.04-20130415_linux.tar.bz2 
-    放在/opt/目录下，解压缩包：tar -jxvf gcc-linaro-arm-linux-gnueabihf-4.7-2013.04-20130415_linux.tar.bz2 
-    在/etc/profile 最后一行添加export PATH=$PATH:/opt/gcc-linaro-arm-linux-gnueabihf-4.7-2013.04-20130415_linux/bin
-
-10、设置静态ip地址
+5、设置静态ip地址
     1）VMware->虚拟机->设置->网络适配器->桥接模式->确定
     2）ifconfig查看网卡的名称
     3）cd /etc/netplan
@@ -64,24 +39,39 @@ ethernets:
          3、注意每一层前边的缩进，至少比上一层多两个空格
      4）netplan apply就ok了
 
-11、安装谷歌拼音输入法
-    1）apt-get install fcitx-googlepinyin
-    2）配置language support。
-         1、win按键，搜索栏输入关键字“language support”，第一次打开会显示语言支持没有完全安装，点击安装并输入密码开始安装
-         2、安装完之后，窗口最后一行“keyboard input method system:”，点击下拉菜单，选择刚才安装的“fcitx”
-         3、重启电脑。
-    3）输入法配置，重启之后，右上角的键盘按钮->configure->Input Method->左下方的“+”号->取消“Only Show Current Language”勾选，搜索框输入pinyin，选择Google Pinyin，点击OK
-    4)关闭设置，可以点击右上角键盘切换输入法，快捷键是Ctrl+space
-
-12，安装ssh远程加密连接服务
+6，安装ssh远程加密连接服务
       1）Ubuntu默认未安装ssh远程加密连接服务，使用如下命令安装即可：apt-get install openssh-server openssh-client，然后重启
       2）如果secureCRT不知道用户名和密码，sudo passwd 用户名 进行修改
       3）重新启动ssh：
            /etc/init.d/ssh stop
            /etc/init.d/ssh restart
+
+7、用SecureCRT登录（我使用的版本是V8.1.4免安装版）
+      输入用户名密码登录之后，会提示"Could not retrieve the error text for error code 0xe1120006"
+      解决方法：
       SecureCRT设置（可能需要下载最新的secureCRT版本）：选项->会话选项->连接->SSH2->秘钥交换->我全部勾选（省事）
 
-13、设置共享目录
+#############################
+下面的安装步骤可以在secureCRT上进行
+#############################
+
+8、vim安装(刚开始没安装的时候，用起来非常奇怪，坑...)
+      在插入状态下，按方向键出来的结果竟然是大写的字母ABCD，这是因为在ubuntu中其实没装vi,只装了vim-tiny，在系统上，vi仅仅是vim的一个别名。 这时候需要自己安装完整版的 vim:
+      apt-get install vim
+
+9、手动更改阿里云的域名
+     /etc/apt/sources.list 文件，注释行不用修改:
+     默认的ubuntu“http://archive.ubuntu.com/”改为“http://mirrors.aliyun.com/”。下载安装软件会更快。
+     apt-get update
+
+10、安装make，gcc，g++等
+    apt-get install build-essential  （这个命令默认安装make，gcc和g++等工具）
+    make --version、gcc --version 和 g++ --version可以查看已经安装的版本
+
+11、64位系统安装32位交叉编译工具，需要安装库支持：
+     apt-get install lib32stdc++6
+
+12、设置共享目录
       1）安装samba，sudo apt-get install samba
       2）/etc/samba/smb.conf 文件最后增加共享目录：
 [share]
@@ -97,6 +87,23 @@ ethernets:
             service smbd stop
             service smbd restart
 
+13、安装目标板的交叉编译工具，选择linux版本的压缩包：
+    gcc-linaro-arm-linux-gnueabihf-4.7-2013.04-20130415_linux.tar.bz2 
+    放在/opt/目录下，解压缩包：tar -jxvf gcc-linaro-arm-linux-gnueabihf-4.7-2013.04-20130415_linux.tar.bz2 
+    在/etc/profile 最后一行添加export PATH=$PATH:/opt/gcc-linaro-arm-linux-gnueabihf-4.7-2013.04-20130415_linux/bin
+    su
+    vi ~/.bashrc  末尾添加(超级用户)：
+    export PATH=$PATH:/opt/gcc-linaro-arm-linux-gnueabihf-4.7-2013.04-20130415_linux/bin
+
+14、在ubuntu的终端安装谷歌拼音输入法（可选）
+    1）apt-get install fcitx-googlepinyin
+    2）配置language support。
+         1、win按键，搜索栏输入关键字“language support”，第一次打开会显示语言支持没有完全安装，点击安装并输入密码开始安装
+         2、安装完之后，窗口最后一行“keyboard input method system:”，点击下拉菜单，选择刚才安装的“fcitx”
+         3、重启电脑。
+    3）输入法配置，重启之后，右上角的键盘按钮->configure->Input Method->左下方的“+”号->取消“Only Show Current Language”勾选，搜索框输入pinyin，选择Google Pinyin，点击OK
+    4)关闭设置，可以点击右上角键盘切换输入法，快捷键是Ctrl+space
+
 14、安装cmake
         apt-get install cmake
         cmake --version
@@ -105,17 +112,13 @@ ethernets:
         apt-get install git
         git --version
 
-        本地生成ssh公钥：ssh-keygen -C '371131444@qq.com' -t rsa，会提示在/root/.ssh/生成公钥私钥
-        上传公钥到github：点击github账户中的settings->profile，选择SSH and GPG keys，点击New SSH key，把~/.ssh/id_rsa.pub中的内容全部复制到Key编辑框中，点击上传。收到邮件需要点击确认。
         配置git的用户名和邮箱：
         git config --global user.name "371131444"
         git config --global user.email "371131444@qq.com"
 
-        添加切换到root超级用户，git等使用tab按键自动补齐功能：
-        cp /usr/share/bash-completion/bash_completion ~/.bash_completion.bash
-        vi ~/.bashrc  末尾添加：
-        source ~/.bash_completion.bash
-
+        本地生成ssh公钥：ssh-keygen -C '371131444@qq.com' -t rsa，会提示在/root/.ssh/生成公钥私钥
+        上传公钥到github：点击github账户中的settings->profile，选择SSH and GPG keys，点击New SSH key，把~/.ssh/id_rsa.pub中的内容全部复制到Key编辑框中，点击上传。收到邮件需要点击确认。
+        
 16、安装doxygen（可选）
        apt-get install doxygen
 
