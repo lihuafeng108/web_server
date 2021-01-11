@@ -35,10 +35,25 @@
     make
     make install
 
-    编译前准备：
-    cp /mnt/share/src/web_server/doc/ustream-ssl.h /mnt/share/build/include/libubox/
-4、编译uhttpd
+4、编译ncurses
     cd ../..
+    cd ncurses
+    参考目录下的“交叉编译说明.txt”进行编译和安装
+
+5、编译readline6
+    cd ..
+    cd readline6
+    参考目录下的“交叉编译说明.txt”进行编译和安装
+
+6、编译lua
+    cd ..
+    cd lua-5.3.6
+    make linux
+    make install
+    
+7、编译uhttpd
+    cp /mnt/share/src/web_server/doc/ustream-ssl.h /mnt/share/build/include/libubox/
+    cd ..
     cd uhttpd
     mkdir tmp
     cd tmp

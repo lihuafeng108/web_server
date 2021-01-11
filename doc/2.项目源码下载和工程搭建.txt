@@ -2,15 +2,21 @@
 在PC端的目录结构：
     3th_apps
         json-c     //克隆代码：git clone https://github.com/json-c/json-c.git，切换到自建分支test-lihf（方便修改测试记录），并上传到自己的github账户上面
-        libubox  //克隆代码：git clone git://git.openwrt.org/project/libubox.git，然后同上操作
+        libubox    //克隆代码：git clone git://git.openwrt.org/project/libubox.git，然后同上操作
         ubus       //克隆代码：git clone git://git.openwrt.org/project/ubus.git，然后同上操作
-        uhttpd   //克隆代码：git clone git://git.openwrt.org/project/uhttpd.git，然后同上操作
-        web_server    //项目总目录
-            doc            //项目相关文档
-            json-c        //子模块，git submodule add ../json-c json-c
-            libubox     //同上
-            ubus         //同上
-            uhttpd     //同上
+        uhttpd     //克隆代码：git clone git://git.openwrt.org/project/uhttpd.git，然后同上操作
+        ncurses    //项目在用开源代码
+        readline6  //项目在用开源代码
+        lua-5.3.6  //项目在用开源代码
+        web_server    //项目总目录，项目需要用到的第三方库的源码，全部以子模块的形式，加到总项目中去
+            doc       //项目相关文档。###！！环境搭建，编译等说明文档，在这里,一切追求精简###
+            json-c    //子模块，git submodule add ../json-c json-c
+            libubox   //同上，openwrt基础库
+            ubus      //同上，ubus总线守护进程，终端解释程序和ubus库
+	    ncurses   //同上，readline6需要依赖的库
+	    readline6 //同上，lua模块需要依赖的库
+            lua-5.3.6 //同上，uhttpd需要用到lua
+            uhttpd    //同上，web服务器开源代码，最终输出目标程序...
             toolChain_json.cmake
             toolChain_libubox.cmake
             toolChain_ubus.cmake

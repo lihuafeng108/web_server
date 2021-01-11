@@ -10,3 +10,12 @@
 [submodule "uhttpd"]
 	path = uhttpd
 	url = ../uhttpd
+[submodule "ncurses"]
+	path = ncurses
+	url = ../ncurses
+[submodule "readline6"]
+	path = readline6
+	url = ../readline6
+[submodule "lua-5.3.6"]
+	path = lua-5.3.6
+	url = ../lua-5.3.6
